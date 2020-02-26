@@ -73,9 +73,9 @@ def train(args):
     print('Started training...')
     while True:
         domA_loader = torch.utils.data.DataLoader(domA_train, batch_size=args.bs,
-                                                  shuffle=True, num_workers=6)
+                                                  shuffle=True, num_workers=2)
         domB_loader = torch.utils.data.DataLoader(domB_train, batch_size=args.bs,
-                                                  shuffle=True, num_workers=6)
+                                                  shuffle=True, num_workers=2)
         if _iter >= args.iters:
             break
 
@@ -90,7 +90,6 @@ def train(args):
             if torch.cuda.is_available():
                 domA_img = domA_img.cuda()
                 domB_img = domB_img.cuda()
-
             domA_img = domA_img.view((-1, 3, args.resize, args.resize))
             domB_img = domB_img.view((-1, 3, args.resize, args.resize))
 
@@ -176,7 +175,7 @@ def train(args):
                 e_separate_A = e_separate_A.eval()
                 e_separate_B = e_separate_B.eval()
                 decoder = decoder.eval()
-
+                import pdb; pdb.set_trace()
                 save_imgs(args, e_common, e_separate_A, e_separate_B, decoder, _iter, size=size, BtoA=True)
                 save_imgs(args, e_common, e_separate_A, e_separate_B, decoder, _iter, size=size, BtoA=False)
                 save_stripped_imgs(args, e_common, e_separate_A, e_separate_B, decoder, _iter, size=size, A=True)

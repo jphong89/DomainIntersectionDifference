@@ -131,10 +131,10 @@ def save_imgs(args, e_common, e_separate_A, e_separate_B, decoder, iters, size, 
 def get_test_imgs(args, crop=None, resize=None):
     domA_test, domB_test = get_test_dataset(args, crop=crop, resize=resize)
 
-    domA_test_loader = torch.utils.data.DataLoader(domA_test, batch_size=64,
-                                                   shuffle=False, num_workers=6)
-    domB_test_loader = torch.utils.data.DataLoader(domB_test, batch_size=64,
-                                                   shuffle=False, num_workers=6)
+    domA_test_loader = torch.utils.data.DataLoader(domA_test, batch_size=4,
+                                                   shuffle=False, num_workers=1)
+    domB_test_loader = torch.utils.data.DataLoader(domB_test, batch_size=4,
+                                                   shuffle=False, num_workers=1)
 
     for domA_img in domA_test_loader:
         if torch.cuda.is_available():
